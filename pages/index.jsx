@@ -1,10 +1,14 @@
 import Head from "next/head";
 import Image from "next/image";
-import Films from "./films";
+import Films from "../components/Films";
 import Main from "../components/Main";
 import Header from "../components/Header";
+import { H1Wrap } from "../components/H1";
+import { TextWrap } from "../components/Text";
+import styled from "styled-components";
+import { rem } from "polished";
 
-export default function Home() {
+export default function Home({ films = [] }) {
   return (
     <>
       <Head>
@@ -15,7 +19,44 @@ export default function Home() {
       </Head>
       <Main>
         <Header />
+        <HomeTitle>MaileHereko</HomeTitle>
+        <HomeText>
+          List of movies and TV Shows, I,{" "}
+          <HomeTextPrimary>Pramod Poudel</HomeTextPrimary> have watched till
+          date. Explore what I have watched and also feel free to make a
+          suggestion. 😉
+        </HomeText>
+        <Films films={films} />
       </Main>
     </>
   );
 }
+
+const HomeTitle = styled(H1Wrap)`
+  margin-bottom: ${rem(16)};
+`;
+
+const HomeText = styled(TextWrap)`
+  margin-bottom: ${rem(24)};
+`;
+
+const HomeTextPrimary = styled(TextWrap)`
+  display: inline;
+  color: ${(props) => props.theme.colors.primary};
+`;
+
+// export async function getStaticProps() {
+//   return fetch("https://kinopoiskapiunofficial.tech/api/v2.2/films/", {
+//     method: "GET",
+//     headers: {
+//       "X-API-KEY": "4f35a3fb-8eaf-495d-a1e5-53a389c3c2a8",
+//       "Content-Type": "application/json",
+//     },
+//   })
+//     .then((res) => res.json())
+//     .then((films) => {
+//       return {
+//         props: { films },
+//       };
+//     });
+// }

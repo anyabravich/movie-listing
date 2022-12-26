@@ -3,8 +3,12 @@ import { ThemeProvider } from "styled-components";
 
 const theme = {
   colors: {
+    primary: "#9c92f8",
     black: "#000000",
     white: "#ffffff",
+    grey: {
+      threeHundred: "#8e95a9",
+    },
   },
   breakpoints: {
     md: "992px",
