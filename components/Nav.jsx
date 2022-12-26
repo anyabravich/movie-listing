@@ -4,22 +4,39 @@ import { rem } from "polished";
 import Link from "next/link";
 
 const Nav = () => {
+  const links = [
+    {
+      href: "/movies",
+      name: "Movies",
+    },
+    {
+      href: "/tv-shows",
+      name: "TV Shows",
+    },
+    {
+      href: "/suggest",
+      name: "Suggest me",
+      arrow: true,
+    },
+  ];
   return (
     <NavWrap>
       <Logo href={"/"} />
       <Menu>
-        <MenuItem>
-          <MenuLink href={"/movies"}>Movies</MenuLink>
-        </MenuItem>
-        <MenuItem>
-          <MenuLink href={"/tv-shows"}>TV Shows</MenuLink>
-        </MenuItem>
-        <MenuItem>
-          <MenuLink href={"/suggest"}>
-            Suggest me
-            <MenuLinkArrow />
-          </MenuLink>
-        </MenuItem>
+        {links.map(({ href, name, arrow }) =>
+          !arrow ? (
+            <MenuItem key={name}>
+              <MenuLink href={href}>{name}</MenuLink>
+            </MenuItem>
+          ) : (
+            <MenuItem key={name}>
+              <MenuLink href={href}>
+                {name}
+                <MenuLinkArrow />
+              </MenuLink>
+            </MenuItem>
+          )
+        )}
       </Menu>
     </NavWrap>
   );
