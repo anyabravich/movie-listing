@@ -1,3 +1,5 @@
+import Main from "../components/Main";
+
 export default function Movies() {
-  return <>Movies</>;
+  return <Main>Movies</Main>;
 }
