@@ -8,6 +8,7 @@ const theme = {
     white: "#ffffff",
     grey: {
       threeHundred: "#8e95a9",
+      fifty: "#ebeef5",
     },
   },
   breakpoints: {

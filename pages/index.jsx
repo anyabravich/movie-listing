@@ -1,12 +1,11 @@
 import Head from "next/head";
-import Image from "next/image";
 import Films from "../components/Films";
 import Main from "../components/Main";
-import Header from "../components/Header";
 import { H1Wrap } from "../components/H1";
 import { TextWrap } from "../components/Text";
 import styled from "styled-components";
 import { rem } from "polished";
+import Header from "../components/Header";
 
 export default function Home({ films = [] }) {
   return (
@@ -17,8 +16,8 @@ export default function Home({ films = [] }) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+
       <Main>
-        <Header />
         <HomeTitle>MaileHereko</HomeTitle>
         <HomeText>
           List of movies and TV Shows, I,{" "}
@@ -40,19 +39,13 @@ const HomeText = styled(TextWrap)`
   margin-bottom: ${rem(24)};
 `;
 
-const HomeTextPrimary = styled(TextWrap)`
+const HomeTextPrimary = styled.span`
   display: inline;
   color: ${(props) => props.theme.colors.primary};
 `;
 
 // export async function getStaticProps() {
-//   return fetch("https://kinopoiskapiunofficial.tech/api/v2.2/films/", {
-//     method: "GET",
-//     headers: {
-//       "X-API-KEY": "4f35a3fb-8eaf-495d-a1e5-53a389c3c2a8",
-//       "Content-Type": "application/json",
-//     },
-//   })
+//   return fetch("https://json-server-gilt.vercel.app/films")
 //     .then((res) => res.json())
 //     .then((films) => {
 //       return {
@@ -60,3 +53,19 @@ const HomeTextPrimary = styled(TextWrap)`
 //       };
 //     });
 // }
+
+export async function getStaticProps() {
+  return fetch("https://kinopoiskapiunofficial.tech/api/v2.2/films/", {
+    method: "GET",
+    headers: {
+      "X-API-KEY": "4f35a3fb-8eaf-495d-a1e5-53a389c3c2a8",
+      "Content-Type": "application/json",
+    },
+  })
+    .then((res) => res.json())
+    .then((films) => {
+      return {
+        props: { films },
+      };
+    });
+}
