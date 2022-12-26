@@ -2,8 +2,7 @@ import Link from "next/link";
 import React from "react";
 
 const Films = ({ films }) => {
-  const { items } = films;
-  console.log(items);
+  // const { items } = films;
   return (
     <div>
       <h1>Список пользователей</h1>
