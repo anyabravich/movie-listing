@@ -4,12 +4,12 @@ import { rem } from "polished";
 import Film from "./Film";
 import Link from "next/link";
 
-const Films = ({ films }) => {
-  const { items } = films;
+const Films = ({ data }) => {
+  const { movies: films } = data;
   return (
     <FilmsWrap>
-      {items.map((props, index) => (
-        <FilmsLink href={`./films/${props.kinopoiskId}`} key={index}>
+      {films.map((props, index) => (
+        <FilmsLink href={`./films/${props._id}`} key={index}>
           <Film {...props} />
         </FilmsLink>
       ))}

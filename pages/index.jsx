@@ -7,7 +7,7 @@ import styled from "styled-components";
 import { rem } from "polished";
 import Header from "../components/Header";
 
-export default function Home({ films = [] }) {
+export default function Home({ data }) {
   return (
     <>
       <Head>
@@ -25,7 +25,7 @@ export default function Home({ films = [] }) {
           date. Explore what I have watched and also feel free to make a
           suggestion. 😉
         </HomeText>
-        <Films films={films} />
+        <Films data={data} />
       </Main>
     </>
   );
@@ -44,28 +44,12 @@ const HomeTextPrimary = styled.span`
   color: ${(props) => props.theme.colors.primary};
 `;
 
-// export async function getStaticProps() {
-//   return fetch("https://json-server-gilt.vercel.app/films")
-//     .then((res) => res.json())
-//     .then((films) => {
-//       return {
-//         props: { films },
-//       };
-//     });
-// }
-
 export async function getStaticProps() {
-  return fetch("https://kinopoiskapiunofficial.tech/api/v2.2/films/", {
-    method: "GET",
-    headers: {
-      "X-API-KEY": "4f35a3fb-8eaf-495d-a1e5-53a389c3c2a8",
-      "Content-Type": "application/json",
-    },
-  })
+  return fetch(process.env.API_KEY)
     .then((res) => res.json())
-    .then((films) => {
+    .then((data) => {
       return {
-        props: { films },
+        props: { data },
       };
     });
 }

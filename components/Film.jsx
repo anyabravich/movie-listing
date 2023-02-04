@@ -2,13 +2,13 @@ import React from "react";
 import styled from "styled-components";
 import { rem } from "polished";
 
-const Film = ({ nameRu, nameOriginal, posterUrlPreview }) => {
+const Film = ({ name, img }) => {
   return (
     <FilmWrap>
       <FilmImgBox>
-        <FilmImg src={posterUrlPreview} />
+        <FilmImg src={img} alt={name} />
       </FilmImgBox>
-      <FilmTitle>{nameRu ?? nameOriginal}</FilmTitle>
+      <FilmTitle>{name}</FilmTitle>
     </FilmWrap>
   );
 };
@@ -22,7 +22,7 @@ const FilmWrap = styled.div`
 `;
 
 const FilmImgBox = styled.div`
-  border-radius: 8px;
+  border-radius: ${rem(8)};
   overflow: hidden;
   height: ${rem(400)};
   margin-bottom: ${rem(24)};
