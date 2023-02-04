@@ -4,12 +4,12 @@ import { rem } from "polished";
 import Header from "../../components/Header";
 
 export default function Film({ film }) {
-  const { posterUrlPreview } = film;
+  const { img } = film;
   return (
     <>
       <Main>
         <FilmBgBox>
-          <FilmBg src={posterUrlPreview} />
+          <FilmBg src={img} />
         </FilmBgBox>
       </Main>
     </>
@@ -43,26 +43,9 @@ const FilmBg = styled.img`
   object-fit: cover;
 `;
 
-// export async function getServerSideProps(context) {
-//   return fetch(`https://json-server-gilt.vercel.app/films/1`)
-//     .then((res) => res.json())
-//     .then((film) => {
-//       return {
-//         props: { film },
-//       };
-//     });
-// }
-
 export async function getServerSideProps(context) {
   return fetch(
-    `https://kinopoiskapiunofficial.tech/api/v2.2/films/${context.query.id}`,
-    {
-      method: "GET",
-      headers: {
-        "X-API-KEY": "4f35a3fb-8eaf-495d-a1e5-53a389c3c2a8",
-        "Content-Type": "application/json",
-      },
-    }
+    `https://movie-listing-server.vercel.app/api/movies/${context.query.id}`
   )
     .then((res) => res.json())
     .then((film) => {
