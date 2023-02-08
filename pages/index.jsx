@@ -5,9 +5,20 @@ import { H1Wrap } from "../components/H1";
 import { TextWrap } from "../components/Text";
 import styled from "styled-components";
 import { rem } from "polished";
-import Header from "../components/Header";
+import Search from "../components/Search";
+import { useState, useEffect } from "react";
 
 export default function Home({ data }) {
+  const [search, setSearch] = useState("");
+  const [films, setFilms] = useState("");
+  const findFilm = films ? films.movies.length : data.movies.length;
+
+  useEffect(() => {
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}?search=${search}`)
+      .then((res) => res.json())
+      .then((data) => setFilms(data));
+  }, [search]);
+
   return (
     <>
       <Head>
@@ -25,7 +36,12 @@ export default function Home({ data }) {
           date. Explore what I have watched and also feel free to make a
           suggestion. 😉
         </HomeText>
-        <Films data={data} />
+        <Search search={search} setSearch={setSearch} />
+        {findFilm ? (
+          <Films data={films ? films : data} />
+        ) : (
+          <h2>Фильм не найден</h2>
+        )}
       </Main>
     </>
   );
@@ -45,7 +61,7 @@ const HomeTextPrimary = styled.span`
 `;
 
 export async function getStaticProps() {
-  return fetch(process.env.API_KEY)
+  return fetch(`${process.env.API_KEY}`)
     .then((res) => res.json())
     .then((data) => {
       return {
