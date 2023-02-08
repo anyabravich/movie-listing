@@ -20,8 +20,17 @@ const Films = ({ data }) => {
 const FilmsWrap = styled.section`
   display: grid;
   gap: ${rem(20)} ${rem(24)};
-  grid-template-columns: repeat(auto-fit, minmax(${rem(282)}, auto));
+  grid-template-columns: repeat(4, 1fr);
   margin-bottom: ${rem(100)};
+  @media (max-width: 1178px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  @media (max-width: 768px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  @media (max-width: 549px) {
+    grid-template-columns: 1fr;
+  }
 `;
 
 const FilmsLink = styled(Link)`
