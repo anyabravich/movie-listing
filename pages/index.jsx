@@ -12,15 +12,16 @@ import Tabs from "../components/Tabs";
 export default function Home({ data }) {
   const [search, setSearch] = useState("");
   const [films, setFilms] = useState("");
+  const [tabValue, setTabValue] = useState("All");
   const findFilm = films ? films.movies.length : data.movies.length;
 
   useEffect(() => {
-    fetch(`${process.env.NEXT_PUBLIC_API_URL}?search=${search}`)
+    fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}?search=${search}&category=${tabValue}`
+    )
       .then((res) => res.json())
       .then((data) => setFilms(data));
-  }, [search]);
-
-  console.log(films);
+  }, [search, tabValue]);
 
   return (
     <>
@@ -40,7 +41,7 @@ export default function Home({ data }) {
           suggestion. 😉
         </HomeText>
         <Search search={search} setSearch={setSearch} />
-        <Tabs />
+        <Tabs setTabValue={setTabValue} />
         {findFilm ? (
           <Films data={films ? films : data} />
         ) : (

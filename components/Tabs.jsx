@@ -1,10 +1,14 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { rem } from "polished";
 
-const Tabs = () => {
+const Tabs = ({ setTabValue }) => {
   const tabsText = ["All", "Movies", "TV Shows"];
   const [activeTab, setActiveTab] = useState(tabsText[0]);
+
+  useEffect(() => {
+    setTabValue(activeTab);
+  }, [activeTab]);
 
   return (
     <TabsItems>
@@ -22,6 +26,7 @@ const Tabs = () => {
 };
 
 const TabsItems = styled.div`
+  cursor: pointer;
   display: inline-flex;
   align-items: center;
   padding: ${rem(8)};
