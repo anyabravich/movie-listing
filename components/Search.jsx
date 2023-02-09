@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { rem } from "polished";
 
-const Search = ({ search, setSearch }) => {
+const Search = ({ setSearch }) => {
   return (
     <SearchField>
       <SearchIcon />
