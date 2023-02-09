@@ -1,13 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { rem } from "polished";
 
 const Tabs = () => {
+  const tabsText = ["All", "Movies", "TV Shows"];
+  const [activeTab, setActiveTab] = useState(tabsText[0]);
+
   return (
     <TabsItems>
-      <TabsItem active>All</TabsItem>
-      <TabsItem>Movies</TabsItem>
-      <TabsItem>TV Shows</TabsItem>
+      {tabsText.map((tab, index) => (
+        <TabsItem
+          key={index}
+          active={activeTab === tab ?? true}
+          onClick={() => setActiveTab(tab)}
+        >
+          {tab}
+        </TabsItem>
+      ))}
     </TabsItems>
   );
 };
