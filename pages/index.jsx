@@ -7,6 +7,7 @@ import styled from "styled-components";
 import { rem } from "polished";
 import Search from "../components/Search";
 import { useState, useEffect } from "react";
+import Tabs from "../components/Tabs";
 
 export default function Home({ data }) {
   const [search, setSearch] = useState("");
@@ -18,6 +19,8 @@ export default function Home({ data }) {
       .then((res) => res.json())
       .then((data) => setFilms(data));
   }, [search]);
+
+  console.log(films);
 
   return (
     <>
@@ -37,6 +40,7 @@ export default function Home({ data }) {
           suggestion. 😉
         </HomeText>
         <Search search={search} setSearch={setSearch} />
+        <Tabs />
         {findFilm ? (
           <Films data={films ? films : data} />
         ) : (

@@ -1,10 +1,12 @@
 import React from "react";
 import styled from "styled-components";
 import { rem } from "polished";
+import Rating from "./Rating";
 
-const Film = ({ name, img }) => {
+const Film = ({ name, img, rating }) => {
   return (
     <FilmWrap>
+      <Rating rating={rating} />
       <FilmImgBox>
         <FilmImg src={img} alt={name} />
       </FilmImgBox>
@@ -14,6 +16,7 @@ const Film = ({ name, img }) => {
 };
 
 const FilmWrap = styled.div`
+  position: relative;
   padding: ${rem(8)} ${rem(8)} ${rem(24)};
   min-height: ${rem(480)};
   background: rgba(32, 40, 62, 0.8);
@@ -25,7 +28,7 @@ const FilmImgBox = styled.div`
   border-radius: ${rem(8)};
   overflow: hidden;
   height: ${rem(400)};
-  margin-bottom: ${rem(24)};
+  margin-bottom: ${rem(25)};
 `;
 
 const FilmImg = styled.img`
@@ -41,6 +44,7 @@ const FilmTitle = styled.div`
   line-height: 150%;
   letter-spacing: 0.02em;
   color: ${(props) => props.theme.colors.grey.fifty};
+  padding-left: ${rem(9)};
 `;
 
 export default Film;
