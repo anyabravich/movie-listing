@@ -8,6 +8,7 @@ import { rem } from "polished";
 import Search from "../components/Search";
 import { useState, useEffect } from "react";
 import Tabs from "../components/Tabs";
+import axios from "axios";
 
 export default function Home({ data }) {
   const [search, setSearch] = useState("");
@@ -16,11 +17,13 @@ export default function Home({ data }) {
   const findFilm = films ? films.movies.length : data.movies.length;
 
   useEffect(() => {
-    fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}?search=${search}&category=${tabValue}`
-    )
-      .then((res) => res.json())
-      .then((data) => setFilms(data));
+    const fetchData = async () => {
+      const { data } = await axios.get(
+        `${process.env.NEXT_PUBLIC_API_URL}?search=${search}&category=${tabValue}`
+      );
+      setFilms(data);
+    };
+    fetchData();
   }, [search, tabValue]);
 
   return (
@@ -42,6 +45,9 @@ export default function Home({ data }) {
         </HomeText>
         <Search search={search} setSearch={setSearch} />
         <Tabs setTabValue={setTabValue} />
+        <HomeSubtitle>
+          {tabValue} <HomeSubtitleCount>({films.total})</HomeSubtitleCount>
+        </HomeSubtitle>
         {findFilm ? (
           <Films data={films ? films : data} />
         ) : (
@@ -54,6 +60,21 @@ export default function Home({ data }) {
 
 const HomeTitle = styled(H1Wrap)`
   margin-bottom: ${rem(16)};
+`;
+
+const HomeSubtitle = styled.p`
+  margin-bottom: ${rem(24)};
+  font-weight: 600;
+  font-size: ${rem(32)};
+  line-height: 125%;
+  letter-spacing: -0.02em;
+  color: #767e94;
+`;
+
+const HomeSubtitleCount = styled.span`
+  font-weight: 400;
+  font-size: ${rem(16)};
+  line-height: 150%;
 `;
 
 const HomeText = styled(TextWrap)`
