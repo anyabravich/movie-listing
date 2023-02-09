@@ -26,7 +26,6 @@ const Tabs = ({ setTabValue }) => {
 };
 
 const TabsItems = styled.div`
-  cursor: pointer;
   display: inline-flex;
   align-items: center;
   padding: ${rem(8)};
@@ -37,7 +36,10 @@ const TabsItems = styled.div`
   margin-bottom: ${rem(24)};
 `;
 
-const TabsItem = styled.div`
+const TabsItem = styled.button`
+  cursor: pointer;
+  border: none;
+  outline: none;
   padding: ${rem(8)} ${rem(32)};
   border-radius: ${rem(8)};
   color: ${(props) => (props.active ? "#EBE9FE;" : "#8E95A9")};
