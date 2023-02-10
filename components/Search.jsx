@@ -15,6 +15,7 @@ const Search = ({ setSearch }) => {
 };
 
 const SearchField = styled.div`
+  margin-top: ${rem(24)};
   padding: ${rem(12)} ${rem(16)};
   margin-bottom: ${rem(80)};
   display: flex;
