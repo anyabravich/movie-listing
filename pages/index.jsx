@@ -9,22 +9,24 @@ import Search from "../components/Search";
 import { useState, useEffect } from "react";
 import Tabs from "../components/Tabs";
 import axios from "axios";
+import Pagination from "../components/Pagination";
 
 export default function Home({ data }) {
   const [search, setSearch] = useState("");
   const [films, setFilms] = useState("");
+  const [page, setPage] = useState(1);
   const [tabValue, setTabValue] = useState("All");
   const findFilm = films ? films.movies.length : data.movies.length;
 
   useEffect(() => {
     const fetchData = async () => {
       const { data } = await axios.get(
-        `${process.env.NEXT_PUBLIC_API_URL}?search=${search}&category=${tabValue}`
+        `${process.env.NEXT_PUBLIC_API_URL}?page=${page}&search=${search}&category=${tabValue}`
       );
       setFilms(data);
     };
     fetchData();
-  }, [search, tabValue]);
+  }, [search, tabValue, page]);
 
   return (
     <>
@@ -51,8 +53,14 @@ export default function Home({ data }) {
         {findFilm ? (
           <Films data={films ? films : data} />
         ) : (
-          <h2>Фильм не найден</h2>
+          <FilmNotFound>Фильм не найден</FilmNotFound>
         )}
+        <Pagination
+          total={findFilm ? films.total : data.total}
+          page={page}
+          limit={findFilm ? films.limit : data.limit}
+          setPage={setPage}
+        />
       </Main>
     </>
   );
@@ -84,6 +92,10 @@ const HomeText = styled(TextWrap)`
 const HomeTextPrimary = styled.span`
   display: inline;
   color: ${(props) => props.theme.colors.primary};
+`;
+
+const FilmNotFound = styled.h2`
+  margin-bottom: ${rem(50)};
 `;
 
 export async function getStaticProps() {
