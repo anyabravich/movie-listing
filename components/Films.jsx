@@ -21,7 +21,7 @@ const FilmsWrap = styled.section`
   display: grid;
   gap: ${rem(20)} ${rem(24)};
   grid-template-columns: repeat(4, 1fr);
-  margin-bottom: ${rem(100)};
+  margin-bottom: ${rem(50)};
   @media (max-width: 1178px) {
     grid-template-columns: repeat(3, 1fr);
   }
