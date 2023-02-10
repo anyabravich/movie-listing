@@ -55,12 +55,14 @@ export default function Home({ data }) {
         ) : (
           <FilmNotFound>Фильм не найден</FilmNotFound>
         )}
-        <Pagination
-          total={findFilm ? films.total : data.total}
-          page={page}
-          limit={findFilm ? films.limit : data.limit}
-          setPage={setPage}
-        />
+        {findFilm !== 0 && (
+          <Pagination
+            total={findFilm ? films.total : data.total}
+            page={page}
+            limit={findFilm ? films.limit : data.limit}
+            setPage={setPage}
+          />
+        )}
       </Main>
     </>
   );
