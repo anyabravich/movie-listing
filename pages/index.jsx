@@ -12,6 +12,7 @@ import axios from "axios";
 import Pagination from "../components/Pagination";
 
 export default function Home({ data }) {
+  const [isLoading, setIsLoading] = useState(true);
   const [search, setSearch] = useState("");
   const [films, setFilms] = useState("");
   const [page, setPage] = useState(1);
@@ -19,13 +20,14 @@ export default function Home({ data }) {
   const findFilm = films ? films.movies.length : data.movies.length;
 
   useEffect(() => {
-    const fetchData = async () => {
-      const { data } = await axios.get(
+    setIsLoading(true);
+    axios
+      .get(
         `${process.env.NEXT_PUBLIC_API_URL}?page=${page}&search=${search}&category=${tabValue}`
-      );
-      setFilms(data);
-    };
-    fetchData();
+      )
+      .then(({ data }) => setFilms(data))
+      .catch((err) => console.log(err))
+      .finally(() => setIsLoading(false));
   }, [search, tabValue, page]);
 
   return (
@@ -50,12 +52,14 @@ export default function Home({ data }) {
         <HomeSubtitle>
           {tabValue} <HomeSubtitleCount>({films.total})</HomeSubtitleCount>
         </HomeSubtitle>
-        {findFilm ? (
+        {findFilm && !isLoading ? (
           <Films data={films ? films : data} />
         ) : (
-          <FilmNotFound>Фильм не найден</FilmNotFound>
+          <FilmNotFound>
+            {isLoading ? "Идет загрузка..." : "Фильм не найден"}
+          </FilmNotFound>
         )}
-        {findFilm !== 0 && (
+        {findFilm !== 0 && !isLoading && (
           <Pagination
             total={findFilm ? films.total : data.total}
             page={page}
