@@ -1,7 +1,6 @@
 import Main from "../../components/Main";
 import styled from "styled-components";
 import { rem } from "polished";
-import Header from "../../components/Header";
 
 export default function Film({ film }) {
   const { img, name, category, genre } = film;
@@ -131,10 +130,8 @@ const FilmTitle = styled.div`
 
 const FilmTextWrap = styled.div``;
 
-export async function getServerSideProps(context) {
-  return fetch(
-    `https://movie-listing-server.vercel.app/api/movies/${context.query.id}`
-  )
+export async function getServerSideProps({ query }) {
+  return fetch(`${process.env.NEXT_PUBLIC_API_URL}/${query.id}`)
     .then((res) => res.json())
     .then((film) => {
       return {
