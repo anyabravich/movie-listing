@@ -1,5 +1,5 @@
 import Head from "next/head";
-import Films from "../components/Films";
+import Films, { FilmsWrap } from "../components/Films";
 import Main from "../components/Main";
 import { H1Wrap } from "../components/H1";
 import { TextWrap } from "../components/Text";
@@ -10,6 +10,7 @@ import { useState, useEffect } from "react";
 import Tabs from "../components/Tabs";
 import axios from "axios";
 import Pagination from "../components/Pagination";
+import Skeleton from "../components/Skeleton";
 
 export default function Home({ data }) {
   const [isLoading, setIsLoading] = useState(true);
@@ -55,9 +56,21 @@ export default function Home({ data }) {
         {findFilm && !isLoading ? (
           <Films data={films ? films : data} />
         ) : (
-          <FilmNotFound>
-            {isLoading ? "Идет загрузка..." : "Фильм не найден"}
-          </FilmNotFound>
+          // <FilmNotFound>
+          //   {isLoading ? "Идет загрузка..." : "Фильм не найден"}
+          // </FilmNotFound>
+          <>
+            {isLoading ? (
+              <HomeSkeleton>
+                <Skeleton />
+                <Skeleton />
+                <Skeleton />
+                <Skeleton />
+              </HomeSkeleton>
+            ) : (
+              "Фильм не найден"
+            )}
+          </>
         )}
         {findFilm !== 0 && !isLoading && (
           <Pagination
@@ -71,6 +84,8 @@ export default function Home({ data }) {
     </>
   );
 }
+
+const HomeSkeleton = styled(FilmsWrap)``;
 
 const HomeTitle = styled(H1Wrap)`
   margin-bottom: ${rem(16)};
