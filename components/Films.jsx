@@ -17,7 +17,7 @@ const Films = ({ data }) => {
   );
 };
 
-const FilmsWrap = styled.section`
+export const FilmsWrap = styled.section`
   display: grid;
   gap: ${rem(20)} ${rem(24)};
   grid-template-columns: repeat(4, 1fr);
