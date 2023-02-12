@@ -33,6 +33,7 @@ export default function App({ Component, pageProps }) {
             justifyContent: "center",
             alignItems: "center",
             height: "100vh",
+            background: "rgb(18, 24, 41)",
           }}
           visible={true}
         />

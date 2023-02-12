@@ -8,12 +8,12 @@ const GlobalStyle = createGlobalStyle`
   }
   *,
   html,
+  body,
   #__next {
     background: rgb(18, 24, 41);
   }
   body {
     font-family: "Poppins", Arial, Helvetica, sans-serif;
-    background: #121829;
     color: #ffffff;
   }
 `;
