@@ -7,6 +7,9 @@ const GlobalStyle = createGlobalStyle`
     padding: 0;
     box-sizing: border-box;
   }
+  #__next {
+    background: rgb(18, 24, 41);
+  }
   body {
     font-family: "Poppins", Arial, Helvetica, sans-serif;
     background: #121829;
