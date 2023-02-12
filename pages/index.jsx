@@ -56,9 +56,6 @@ export default function Home({ data }) {
         {findFilm && !isLoading ? (
           <Films data={films ? films : data} />
         ) : (
-          // <FilmNotFound>
-          //   {isLoading ? "Идет загрузка..." : "Фильм не найден"}
-          // </FilmNotFound>
           <>
             {isLoading ? (
               <HomeSkeleton>
@@ -68,7 +65,7 @@ export default function Home({ data }) {
                 <Skeleton />
               </HomeSkeleton>
             ) : (
-              "Фильм не найден"
+              <FilmNotFound>Фильм не найден</FilmNotFound>
             )}
           </>
         )}

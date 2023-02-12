@@ -13,14 +13,13 @@ export default function App({ Component, pageProps }) {
 
   useEffect(() => {
     setTimeout(() => {
-      // setIsLoad(false);
+      setIsLoad(false);
     }, 1000);
   }, []);
 
   return (
     <Theme>
       <GlobalStyles />
-
       {isLoad ? (
         <BallTriangle
           height={100}
@@ -33,7 +32,6 @@ export default function App({ Component, pageProps }) {
             justifyContent: "center",
             alignItems: "center",
             height: "100vh",
-            background: "rgb(18, 24, 41)",
           }}
           visible={true}
         />
