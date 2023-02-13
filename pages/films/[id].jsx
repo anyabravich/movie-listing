@@ -1,11 +1,15 @@
 import Main from "../../components/Main";
 import styled from "styled-components";
 import { rem } from "polished";
+import Head from "next/head";
 
 export default function Film({ film }) {
-  const { img, name, category, genre } = film;
+  const { img, name, category, genre, rating } = film;
   return (
     <>
+      <Head>
+        <title>Movie</title>
+      </Head>
       <Main>
         <FilmBgBox>
           <FilmBg src={img} />
@@ -23,9 +27,32 @@ export default function Film({ film }) {
             <FilmCover src={img} />
           </FilmCoverWrap>
           <FilmTextWrap>
+            <FilmTextWrapTitle>
+              Part of the journey is the end.
+            </FilmTextWrapTitle>
+            <FilmTextWrapText>
+              After the devastating events of Avengers: Infinity War, the
+              universe is in ruins due to the efforts of the Mad Titan, Thanos.
+              With the help of remaining allies, the Avengers must assemble once
+              more in order to undo Thanos' actions and restore order to the
+              universe once and for all, no matter what consequences may be in
+              store.
+            </FilmTextWrapText>
+            <FilmTextWrapRating>
+              <FilmTextWrapRatingIcon />
+              <FilmTextWrapRatingCount>{rating}</FilmTextWrapRatingCount>
+            </FilmTextWrapRating>
             <FilmTextWrapItem>
               <FilmTextWrapItemTitle>Type</FilmTextWrapItemTitle>
               <FilmTextWrapItemValue>{category}</FilmTextWrapItemValue>
+            </FilmTextWrapItem>
+            <FilmTextWrapItem>
+              <FilmTextWrapItemTitle>Release Date:</FilmTextWrapItemTitle>
+              <FilmTextWrapItemValue>2019-04-24</FilmTextWrapItemValue>
+            </FilmTextWrapItem>
+            <FilmTextWrapItem>
+              <FilmTextWrapItemTitle>Run time</FilmTextWrapItemTitle>
+              <FilmTextWrapItemValue>181 min</FilmTextWrapItemValue>
             </FilmTextWrapItem>
             <FilmTextWrapItem>
               <FilmTextWrapItemTitle>Genres</FilmTextWrapItemTitle>
@@ -38,11 +65,69 @@ export default function Film({ film }) {
   );
 }
 
-const FilmTextWrapItem = styled.div``;
+const FilmTextWrapTitle = styled.p`
+  font-weight: 700;
+  font-size: ${rem(24)};
+  line-height: 133%;
+  letter-spacing: -0.015em;
+  color: #ebeef5;
+  margin-bottom: ${rem(24)};
+`;
 
-const FilmTextWrapItemTitle = styled.div``;
+const FilmTextWrapText = styled.p`
+  font-weight: 400;
+  font-size: ${rem(20)};
+  line-height: 160%;
+  color: ${(props) => props.theme.colors.grey.var300};
+  margin-bottom: ${rem(24)};
+`;
 
-const FilmTextWrapItemValue = styled.div``;
+const FilmTextWrapRating = styled.div`
+  display: inline-flex;
+  align-items: center;
+  padding: ${rem(4)} ${rem(8)};
+  gap: ${rem(4)};
+  background: rgba(0, 0, 0, 0.65);
+  backdrop-filter: blur(${rem(4)});
+  border-radius: ${rem(8)};
+  margin-bottom: ${rem(24)};
+`;
+
+const FilmTextWrapRatingIcon = styled.i`
+  width: ${rem(16)};
+  height: ${rem(16)};
+  background: url("data:image/svg+xml,%3Csvg width='16' height='16' viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M9.15333 2.34001L10.3267 4.68668C10.4867 5.01334 10.9133 5.32668 11.2733 5.38668L13.4 5.74001C14.76 5.96668 15.08 6.95334 14.1 7.92668L12.4467 9.58001C12.1667 9.86001 12.0133 10.4 12.1 10.7867L12.5733 12.8333C12.9467 14.4533 12.0867 15.08 10.6533 14.2333L8.66 13.0533C8.3 12.84 7.70667 12.84 7.34 13.0533L5.34667 14.2333C3.92 15.08 3.05333 14.4467 3.42667 12.8333L3.9 10.7867C3.98667 10.4 3.83333 9.86001 3.55333 9.58001L1.9 7.92668C0.926667 6.95334 1.24 5.96668 2.6 5.74001L4.72667 5.38668C5.08 5.32668 5.50667 5.01334 5.66667 4.68668L6.84 2.34001C7.48 1.06668 8.52 1.06668 9.15333 2.34001Z' stroke='%23FFAD49' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E%0A")
+    no-repeat center center;
+`;
+
+const FilmTextWrapRatingCount = styled.div`
+  font-weight: 400;
+  font-size: ${rem(16)};
+  line-height: 150%;
+  color: #ffad49;
+`;
+
+const FilmTextWrapItem = styled.div`
+  margin-bottom: ${rem(24)};
+  &:last-child {
+    margin-bottom: 0;
+  }
+`;
+
+const FilmTextWrapItemTitle = styled.div`
+  font-weight: 400;
+  font-size: ${rem(16)};
+  line-height: 150%;
+  color: ${(props) => props.theme.colors.grey.var400};
+  margin-bottom: ${rem(8)};
+`;
+
+const FilmTextWrapItemValue = styled.div`
+  font-weight: 400;
+  font-size: ${rem(20)};
+  line-height: 160%;
+  color: ${(props) => props.theme.colors.grey.var100};
+`;
 
 const FilmBgBox = styled.div`
   position: relative;
@@ -109,6 +194,7 @@ const FilmContent = styled.div`
   display: grid;
   gap: ${rem(80)};
   grid-template-columns: repeat(auto-fit, minmax(${rem(300)}, 1fr));
+  margin-bottom: ${rem(160)};
 `;
 
 const FilmCoverWrap = styled.div`

@@ -7,6 +7,9 @@ const theme = {
     black: "#000000",
     white: "#ffffff",
     grey: {
+      var100: "#c3c8d4",
+      var300: "#8e95a9",
+      var400: "#767e94",
       threeHundred: "#8e95a9",
       fifty: "#ebeef5",
     },

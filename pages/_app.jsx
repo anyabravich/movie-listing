@@ -5,6 +5,7 @@ import GlobalStyles from "../styles/GlobalStyles";
 import Theme from "../styles/Theme";
 import { BallTriangle } from "react-loader-spinner";
 import { useEffect, useState } from "react";
+import Head from "next/head";
 
 export default function App({ Component, pageProps }) {
   const { loading } = usePageLoading();
@@ -43,7 +44,12 @@ export default function App({ Component, pageProps }) {
               <h1>Loading...</h1>
             </Container>
           ) : (
-            <Component {...pageProps} />
+            <>
+              <Head>
+                <title>Movies</title>
+              </Head>
+              <Component {...pageProps} />
+            </>
           )}
         </>
       )}
