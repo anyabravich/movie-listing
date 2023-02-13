@@ -27,7 +27,9 @@ export default function tvShows({ data }) {
   return (
     <Main>
       <MoviesTitle>Movies</MoviesTitle>
-      <Search search={search} setSearch={setSearch} />
+      <TvShowsSearch>
+        <Search search={search} setSearch={setSearch} />
+      </TvShowsSearch>
       {findFilm ? (
         <Films data={films ? films : data} />
       ) : (
@@ -44,6 +46,12 @@ export default function tvShows({ data }) {
     </Main>
   );
 }
+
+const TvShowsSearch = styled.div`
+  width: ${rem(344)};
+  margin-top: ${rem(24)};
+  margin-bottom: ${rem(80)};
+`;
 
 const MoviesTitle = styled(H1Wrap)``;
 

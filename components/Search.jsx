@@ -1,27 +1,45 @@
 import React from "react";
 import styled from "styled-components";
 import { rem } from "polished";
+import Button from "./Button";
 
-const Search = ({ setSearch }) => {
+const Search = ({ setSearch, click }) => {
   return (
-    <SearchField>
-      <SearchIcon />
-      <SearchInput
-        onChange={(e) => setSearch(e.target.value)}
-        placeholder="Search Movies or TV Shows"
-      />
-    </SearchField>
+    <>
+      {click ? (
+        <SearchWrap>
+          <SearchField>
+            <SearchIcon />
+            <SearchInput placeholder="Search Movies or TV Shows" />
+          </SearchField>
+          <Button>Search</Button>
+        </SearchWrap>
+      ) : (
+        <SearchField>
+          <SearchIcon />
+          <SearchInput
+            onChange={(e) => setSearch(e.target.value)}
+            placeholder="Search Movies or TV Shows"
+          />
+        </SearchField>
+      )}
+    </>
   );
 };
 
+const SearchWrap = styled.div`
+  display: flex;
+  align-items: center;
+  gap: ${rem(5)};
+`;
+
 const SearchField = styled.div`
-  margin-top: ${rem(24)};
+  flex-shrink: 0;
   padding: ${rem(12)} ${rem(16)};
-  margin-bottom: ${rem(80)};
   display: flex;
   align-items: center;
   gap: ${rem(16)};
-  width: ${rem(344)};
+  width: 100%;
   height: ${rem(64)};
   border: 1px solid #323b54;
   border-radius: ${rem(12)};

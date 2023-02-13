@@ -41,9 +41,10 @@ export default function Home({ data }) {
           date. Explore what I have watched and also feel free to make a
           suggestion. 😉
         </HomeText>
-        <Search search={search} setSearch={setSearch} />
+        <HomeSearch>
+          <Search search={search} setSearch={setSearch} />
+        </HomeSearch>
         <Tabs setTabValue={setTabValue} />
-
         {findFilm && !isLoading ? (
           <>
             <HomeSubtitle>
@@ -77,6 +78,12 @@ export default function Home({ data }) {
     </>
   );
 }
+
+const HomeSearch = styled.div`
+  width: ${rem(344)};
+  margin-top: ${rem(24)};
+  margin-bottom: ${rem(80)};
+`;
 
 const HomeSkeleton = styled(FilmsWrap)``;
 
