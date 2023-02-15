@@ -13,7 +13,7 @@ import Pagination from "../components/Pagination";
 import Skeleton from "../components/Skeleton";
 
 export default function Home({ data }) {
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const [search, setSearch] = useState("");
   const [films, setFilms] = useState("");
   const [page, setPage] = useState(1);
@@ -119,12 +119,11 @@ const FilmNotFound = styled.h2`
   margin-bottom: ${rem(50)};
 `;
 
-export async function getStaticProps() {
-  return fetch(`${process.env.API_KEY}`)
-    .then((res) => res.json())
-    .then((data) => {
-      return {
-        props: { data },
-      };
-    });
-}
+export const getStaticProps = async () => {
+  const { data } = await axios.get(`${process.env.API_KEY}`);
+  return {
+    props: {
+      data,
+    },
+  };
+};
