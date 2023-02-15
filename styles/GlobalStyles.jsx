@@ -15,6 +15,9 @@ const GlobalStyle = createGlobalStyle`
     font-family: "Poppins", Arial, Helvetica, sans-serif;
     color: #ffffff;
   }
+  a {
+    text-decoration: none;
+  }
 `;
 
 export default GlobalStyle;

@@ -6,7 +6,7 @@ const Container = ({ children }) => {
   return <ContainerWrap>{children}</ContainerWrap>;
 };
 
-const ContainerWrap = styled.div`
+export const ContainerWrap = styled.div`
   max-width: ${rem(1200)};
   margin: 0 auto;
   padding: 0 ${rem(20)};
