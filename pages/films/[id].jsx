@@ -231,11 +231,13 @@ export const getStaticProps = async ({ params }) => {
       notFound: true,
     };
   }
-  return fetch(`${process.env.NEXT_PUBLIC_API_URL}/${params.id}`)
-    .then((res) => res.json())
-    .then((film) => {
-      return {
-        props: { film },
-      };
-    });
+  const { data: film } = await axios.get(
+    `${process.env.NEXT_PUBLIC_API_URL}/${params.id}`
+  );
+
+  return {
+    props: {
+      film,
+    },
+  };
 };
