@@ -2,6 +2,7 @@ import Main from "../../components/Main";
 import styled from "styled-components";
 import { rem } from "polished";
 import Head from "next/head";
+import axios from "axios";
 
 export default function Film({ film }) {
   const { img, name, category, genre, rating } = film;
@@ -216,12 +217,25 @@ const FilmTitle = styled.div`
 
 const FilmTextWrap = styled.div``;
 
-export async function getServerSideProps({ query }) {
-  return fetch(`${process.env.NEXT_PUBLIC_API_URL}/${query.id}`)
+export const getStaticPaths = async () => {
+  const { data: films } = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}`);
+  return {
+    paths: films.movies.map((p) => "/films/" + p._id),
+    fallback: true,
+  };
+};
+
+export const getStaticProps = async ({ params }) => {
+  if (!params) {
+    return {
+      notFound: true,
+    };
+  }
+  return fetch(`${process.env.NEXT_PUBLIC_API_URL}/${params.id}`)
     .then((res) => res.json())
     .then((film) => {
       return {
         props: { film },
       };
     });
-}
+};
