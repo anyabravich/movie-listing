@@ -221,7 +221,7 @@ export const getStaticPaths = async () => {
   const { data: films } = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}`);
   return {
     paths: films.movies.map((p) => "/films/" + p._id),
-    fallback: true,
+    fallback: false,
   };
 };
 
