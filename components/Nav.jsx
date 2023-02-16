@@ -2,8 +2,11 @@ import React from "react";
 import styled from "styled-components";
 import { rem } from "polished";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 const Nav = () => {
+  const router = useRouter();
+
   const links = [
     {
       href: "/movies",
@@ -19,24 +22,59 @@ const Nav = () => {
       arrow: true,
     },
   ];
+
+  const linksLogin = [
+    {
+      href: "/dashboard",
+      name: "Dashboard",
+    },
+    {
+      href: "/suggestions",
+      name: "Suggestions",
+    },
+    {
+      href: "/add",
+      name: "Add",
+    },
+    {
+      href: "/logout",
+      name: "Logout",
+    },
+  ];
+
   return (
-    <NavWrap>
+    <NavWrap path={router.pathname}>
       <Logo href={"/"} />
       <Menu>
-        {links.map(({ href, name, arrow }) =>
-          !arrow ? (
-            <MenuItem key={name}>
-              <MenuLink href={href}>{name}</MenuLink>
-            </MenuItem>
-          ) : (
-            <MenuItem key={name}>
-              <MenuLink href={href}>
-                {name}
-                <MenuLinkArrow />
-              </MenuLink>
-            </MenuItem>
-          )
-        )}
+        {router.pathname !== "/login"
+          ? links.map(({ href, name, arrow }) =>
+              !arrow ? (
+                <MenuItem key={name}>
+                  <MenuLink href={href}>{name}</MenuLink>
+                </MenuItem>
+              ) : (
+                <MenuItem key={name}>
+                  <MenuLink href={href}>
+                    {name}
+                    <MenuLinkArrow />
+                  </MenuLink>
+                </MenuItem>
+              )
+            )
+          : linksLogin.map(({ href, name, arrow }) =>
+              !arrow ? (
+                <MenuItem key={name}>
+                  <MenuLink href={href}>{name}</MenuLink>
+                </MenuItem>
+              ) : (
+                <MenuItem key={name}>
+                  <MenuLink href={href}>
+                    {name}
+                    <MenuLinkArrow />
+                  </MenuLink>
+                </MenuItem>
+              )
+            )}
       </Menu>
     </NavWrap>
   );
@@ -47,10 +85,11 @@ const NavWrap = styled.nav`
   align-items: center;
   justify-content: space-between;
   height: ${rem(80)};
-  margin-bottom: ${rem(80)};
+  margin-bottom: ${(props) => (props.path === "/login" ? rem(40) : rem(80))};
 `;
 
 const Logo = styled(Link)`
+  flex-shrink: 0;
   display: block;
   width: ${rem(40)};
   height: ${rem(40)};
@@ -62,6 +101,9 @@ const Menu = styled.ul`
   display: flex;
   list-style: none;
   gap: ${rem(16)};
+  @media (max-width: 568px) {
+    display: none;
+  }
 `;
 
 const MenuItem = styled.li`

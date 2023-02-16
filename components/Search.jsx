@@ -12,7 +12,7 @@ const Search = ({ setSearch, click }) => {
             <SearchIcon />
             <SearchInput placeholder="Search Movies or TV Shows" />
           </SearchField>
-          <Button>Search</Button>
+          <Button fullHeight>Search</Button>
         </SearchWrap>
       ) : (
         <SearchField>
@@ -31,6 +31,7 @@ const SearchWrap = styled.div`
   display: flex;
   align-items: center;
   gap: ${rem(5)};
+  height: ${rem(64)};
 `;
 
 const SearchField = styled.div`
@@ -65,7 +66,6 @@ const SearchInput = styled.input`
   font-size: ${rem(14)};
   line-height: ${rem(16)};
   font-family: "Poppins", Arial, Helvetica, sans-serif;
-
   &::placeholder {
     color: #475069;
   }

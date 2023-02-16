@@ -2,12 +2,12 @@ import React from "react";
 import { rem } from "polished";
 import styled from "styled-components";
 
-const Button = ({ children }) => {
-  return <ButtonWrap>{children}</ButtonWrap>;
+const Button = ({ children, fullHeight }) => {
+  return <ButtonWrap fullHeight={fullHeight}>{children}</ButtonWrap>;
 };
 
 export const ButtonWrap = styled.button`
-  height: ${rem(64)};
+  height: ${(props) => (props.fullHeight ? "inherit" : rem(56))};
   background: #7b6ef6;
   border: 2px solid #7b6ef6;
   border-radius: 12px;
